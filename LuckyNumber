@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+public class LuckyNumber {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the number of elements: ");
+        int n = sc.nextInt();
+
+        if (n > 50) {
+            System.out.println("Invalid entry: Number of elements cannot exceed 50.");
+            return;
+        }
+
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++)
+            arr[i] = i + 1;
+
+        System.out.println("\nLucky Number Operation:\n");
+
+        for (int del = 1; del < n; del++) {
+            for (int i = del; i < n; i += del) {
+                System.arraycopy(arr, i + 1, arr, i, n - i - 1);
+                n--;
+            }
+            for (int i = 0; i < n; i++)
+                System.out.print(arr[i] + " ");
+            System.out.println();
+        }
+
+        System.out.print("\nHence, the Lucky Numbers Less than " + n + " are: ");
+        for (int i = 0; i < n; i++)
+            System.out.print((i > 0 ? "," : "") + arr[i]);
+        System.out.println();
+    }
+}
